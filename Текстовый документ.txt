@@ -1,0 +1,134 @@
+так, смотри, мне нужно сделать юзер сервис джава состоящий из сразу нескольких условий, которые я тебе скину на картинках, тебе надо определить как это сделать, в какой среде какие приложения использовать и так далее  
+[User Service] DB Schema                                                                                                                                                   Create several tables:
+users
+
+Columns:
+
+id
+
+name
+
+surname
+
+birth_date
+
+email
+
+active
+
+ 
+
+payment_cards
+
+Columns:
+
+id
+
+user_id
+
+number
+
+holder
+
+expiration_date
+
+active
+
+ 
+
+Each user could have multiple cards!
+
+Use Liquibase for automatic DB schema creation!
+
+Add JPA Auditing logic to all entities (CreatedAt, UpdatedAt)
+
+Add indexes!
+
+All DB properties should be as env variables
+
+
+[User Service] DAO Layer
+
+Create entities for tables in DB.
+
+Implement CRUD operations:
+
+Create User/Card (one user should have no more than 5 cards)
+
+Get User/Card by id
+
+Get all Users/Cards with pagination and filter by first name and surname (use Specifications)
+
+Get all Cards by User id
+
+Update User/Card by id
+
+Activate/Deactivate user/card
+
+ 
+
+Use Cascade operations!
+
+Use different method types (named methods, native SQL, JPQL)
+
+
+
+[User Service] ServiceLayer
+
+
+Controller layer operates DTOs and DAO Layer operates entities.
+
+Create DTOs for entities from DAO Layer. Use Mapstruct to convert DTO → Entity and Entity → DTO.
+
+Add validation annotations for DTO.
+
+Use @Transactional for UPDATE/DELETE operations
+
+
+[User Service] Controller Layer
+
+Implement Rest API for functionalities from Service and Dao Layer.
+
+Add exception handling for all endpoints (create custom exceptions).
+
+ 
+
+Response DTOs should be wrapped by ResponseEntity with appropriate status
+
+
+[User Service] Caching
+
+Add caching of user info with cards using Redis in Service Layer.
+
+ 
+
+Manage cache in case of updating and deleting user info!
+
+
+[User Service] Testing 
+
+
+Implement Unit tests for all Service Layer methods
+
+Implement Integration tests using TestContainers. Test the whole flow from Controller to DB layer
+
+
+[User Service] Containerization
+
+Create docker file for service
+
+Create Docker Compose file using application image, PostgreSQL image and Redis image
+
+Create two Spring profiles: one for local run, another for docker
+
+[User Service] CI Pipeline
+
+Create CI Pipeline for git push using Github Actions with following steps:
+
+Build
+
+Testing
+
+Code Analysis (sonarqube)
+
+Artefact Creation (docker image)
