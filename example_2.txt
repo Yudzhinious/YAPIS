@@ -1,0 +1,48 @@
+px = read()
+py = read()
+radius = read()
+
+point center = (px, py)
+circle c = (center, radius)
+
+func circle_area(num r):
+    result = 3.14*r*r
+    return result
+
+for i in range(0, 10):
+    px = read()
+    py = read()
+    point user_point = (px, py)
+
+    if contains(c, user_point):
+        write("Точка принадлежит окружности")
+    else:
+        write("Точка вне окружности")
+
+angle = 0
+while angle < 360:
+    grad = angle*3.14/180
+    px = center.x + radius*cos(grad)
+    py = center.y + radius*sin(grad)
+
+    write(px)
+    write(py)
+
+    angle = angle + 30
+
+switch:
+    case radius < 10:
+        write("Маленькая окружность")
+    case radius >= 10 and radius < 100:
+        write("Средняя окружность")
+    case radius >= 100:
+        write("Большая окружность")
+
+area = circle_area(radius)
+this_area = 0
+i = 1
+
+until this_area >= area:
+    this_area = 3.14*i*i
+    write(i, this_area)
+    i = i + 1

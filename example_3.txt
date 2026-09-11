@@ -1,0 +1,70 @@
+x1 = read()
+y1 = read()
+point p1 = (x1, y1)
+
+x2 = read()
+y2 = read()
+point p2 = (x2, y2)
+
+x3 = read()
+y3 = read()
+point p3 = (x3, y3)
+
+polygon triangle = []
+triangle.points.append(p1)
+triangle.points.append(p2)
+triangle.points.append(p3)
+
+line l1 = (p1, p2)
+line l2 = (p2, p3)
+line l3 = (p3, p1)
+
+side_a = distance(p1, p2)
+side_b = distance(p2, p3)
+side_c = distance(p3, p1)
+
+func polygon_perimeter(polygon poly):
+    result = 0
+    n = len(poly.points)
+    
+    for i in range(0, n):
+        p1 = poly.points[i]
+        p2 = poly.points[(i + 1) % n]
+        result = result + distance(p1, p2)
+    return result
+
+func triangle_area(num a, num b, num c):
+    func heron_formula(num sem_perim, num x, num y, num z):
+        result = sem_perim*(sem_perim - x)*(sem_perim - y)*(sem_perim - z)
+        return result
+
+    s = (a + b + c)/2
+    area = heron_formula(s, a, b, c)
+    
+    if area > 0:
+        return sqrt(area)
+    else:
+        return 0
+
+func triangle_type(num a, num b, num c):
+    if a == b and b == c:
+        return 1 
+    else:
+        return 2
+
+if side_a + side_b > side_c and side_b + side_c > side_a and side_c + side_a > side_b:
+    write("Из таких точек треугольник может быть построен")
+    
+    perimeter = polygon_perimeter(triangle)
+    write(perimeter)
+    
+    area = triangle_area(side_a, side_b, side_c)
+    write(area)
+    
+    switch triangle_type(side_a, side_b, side_c):
+        case 1:
+            write("Треугольник равносторонний")
+        case 2:
+            write("Треугольник не равносторонний")
+else:
+    write("Из таких точек треугольник построить нельзя")
